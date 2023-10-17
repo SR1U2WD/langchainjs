@@ -244,6 +244,7 @@
       "src/storage/ioredis.ts",
       "src/storage/vercel_kv.ts",
       "src/graphs/neo4j_graph.ts",
+      "src/graphs/falkordb_graph.ts",
       "src/hub.ts",
       "src/util/math.ts",
       "src/util/time.ts",

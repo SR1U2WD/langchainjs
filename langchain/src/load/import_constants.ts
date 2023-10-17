@@ -141,6 +141,7 @@ export const optionalImportEntrypoints = [
   "langchain/storage/ioredis",
   "langchain/storage/vercel_kv",
   "langchain/graphs/neo4j_graph",
+  "langchain/graphs/falkordb_graph",
   "langchain/hub",
   "langchain/experimental/multimodal_embeddings/googlevertexai",
   "langchain/experimental/chat_models/anthropic_functions",
