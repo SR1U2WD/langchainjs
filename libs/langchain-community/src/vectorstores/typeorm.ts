@@ -29,6 +29,7 @@ export class TypeORMVectorStoreDocument extends Document {
 }
 
 const defaultDocumentTableName = "documents";
+const defaultSchemaName = "public";
 
 /**
  * Class that provides an interface to a Postgres vector database. It
@@ -61,7 +62,7 @@ export class TypeORMVectorStore extends VectorStore {
   ) {
     super(embeddings, fields);
     this.tableName = fields.tableName || defaultDocumentTableName;
-    this.schemaName = fields.schemaName || "public";
+    this.schemaName = fields.schemaName || defaultSchemaName;
     this.filter = fields.filter;
 
     const TypeORMDocumentEntity = new EntitySchema<TypeORMVectorStoreDocument>({
