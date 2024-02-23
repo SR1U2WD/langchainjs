@@ -13,6 +13,7 @@ import { getEnvironmentVariable } from "@langchain/core/utils/env";
 export interface TypeORMVectorStoreArgs {
   postgresConnectionOptions: DataSourceOptions;
   tableName?: string;
+  schemaName?: string;
   filter?: Metadata;
   verbose?: boolean;
 }
@@ -40,6 +41,8 @@ export class TypeORMVectorStore extends VectorStore {
 
   tableName: string;
 
+  schemaName: string;
+
   documentEntity: EntitySchema;
 
   filter?: Metadata;
@@ -58,6 +61,7 @@ export class TypeORMVectorStore extends VectorStore {
   ) {
     super(embeddings, fields);
     this.tableName = fields.tableName || defaultDocumentTableName;
+    this.schemaName = fields.schemaName || "public";
     this.filter = fields.filter;
 
     const TypeORMDocumentEntity = new EntitySchema<TypeORMVectorStoreDocument>({
@@ -221,7 +225,7 @@ export class TypeORMVectorStore extends VectorStore {
     );
 
     await this.appDataSource.query(`
-      CREATE TABLE IF NOT EXISTS ${this.tableName} (
+      CREATE TABLE IF NOT EXISTS ${this.schemaName}.${this.tableName} (
         "id" uuid NOT NULL DEFAULT uuid_generate_v4() PRIMARY KEY,
         "pageContent" text,
         metadata jsonb,
